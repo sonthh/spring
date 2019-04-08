@@ -12,7 +12,7 @@
 
             <form action="" method="post" th:object="${category}">
                 <div class="form-group">
-                    <label for="">T�n</label>
+                    <label for="">Tên</label>
                     <input type="text" value="" th:field="*{name}" class="form-control" id="" placeholder="" />
                     <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
                 </div>
