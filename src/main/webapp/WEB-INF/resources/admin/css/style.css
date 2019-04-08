@@ -1,0 +1,21 @@
+.error {
+	color: #00BCD4;
+	font-size: 12px;
+	font-style: italic;
+}
+
+select {
+	color: #6c757d;
+}
+
+option.option-level-0 {
+	color: #6c757d;
+}
+
+.option-level-1 {
+	color: #dc3545;
+}
+
+option.option-level-2 {
+	color: #007bff;
+}

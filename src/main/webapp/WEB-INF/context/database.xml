@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:mvc="http://www.springframework.org/schema/mvc"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+  xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx.xsd
+     http://www.springframework.org/schema/data/jpa 
+    http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+  <bean id="ds"
+    class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    <property name="driverClassName"
+      value="${jdbc.driverClassName}" />
+    <property name="url" value="${jdbc.url}" />
+    <property name="username" value="${jdbc.username}" />
+    <property name="password" value="${jdbc.password}" />
+  </bean>
+  <context:property-placeholder
+    location="classpath:configs/database.properties" />
+
+  <bean id="jdbcTemplate"
+    class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="ds" />
+  </bean>
+
+  <!-- START: HIBERNATE -->
+  <!-- <bean id="sessionFactory"
+    class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+    <property name="dataSource" ref="ds" />
+    <property name="packagesToScan" value="com.itsontran.entity" />
+    <property name="mappingResources"> <list> <value>nhanvien.hbm.xml</value> 
+      //cách cũ đã có cách mới </list> </property>
+    <property name="hibernateProperties"
+      value="classpath:configs/hibernate.properties" />
+    <property name="hibernateProperties"> <props> <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop> 
+      <prop key="hibernate.current_session_context_class">thread</prop> <prop key="hibernate.show_sql">false</prop> 
+      </props> </property>
+  </bean>
+
+  <bean id="transactionManager"
+    class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+    <property name="sessionFactory" ref="sessionFactory" />
+  </bean> -->
+  <!-- END: HIBERNATE -->
+
+  <!-- START: DATA JPA -->
+  <bean id="hibernateJpaVendorAdapter"
+    class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
+
+  <bean id="entityManagerFactory"
+    class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <property name="dataSource" ref="ds" />
+    <property name="jpaVendorAdapter"
+      ref="hibernateJpaVendorAdapter" />
+    <!-- Set JPA properties -->
+    <property name="jpaProperties">
+      <props>
+        <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+        <prop key="javax.persistence.schema-generation.database.action">none</prop>
+        <prop key="hibernate.ejb.use_class_enhancer">true</prop>
+      </props>
+    </property>
+    <!-- Set base package of your entities -->
+    <property name="packagesToScan" value="demo.entity" />
+    <!-- Set share cache mode -->
+    <property name="sharedCacheMode" value="ENABLE_SELECTIVE" />
+    <!-- Set validation mode -->
+    <property name="validationMode" value="NONE" />
+  </bean>
+
+   <bean id="transactionManager" 
+    class="org.springframework.orm.jpa.JpaTransactionManager">
+    <property name="entityManagerFactory" ref="entityManagerFactory"/>
+  </bean>
+  <jpa:repositories base-package="demo.repository"/>
+  <!-- END: DATA JPA -->
+
+  <tx:annotation-driven
+    transaction-manager="transactionManager" />
+
+</beans>

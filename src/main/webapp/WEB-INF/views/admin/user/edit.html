@@ -1,0 +1,88 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Spring</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/adminUrl/css/bootstrap.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/adminUrl/css/style.css}" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                    <div class="collapse navbar-collapse" id="">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li th:class="nav-item" th:classappend="${categoryLinkActive} ? 'active'">
+                                <a class="nav-link" th:href="@{/admin/category/index}">Category</a>
+                            </li>
+                            <li th:class="nav-item" th:classappend="${userLinkActive} ? 'active'">
+                                <a class="nav-link" th:href="@{/admin/user/index}">User</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <nav class="breadcrumb">
+                            <a class="breadcrumb-item" th:href="@{/admincp}">Admin</a>
+                            <a class="breadcrumb-item" th:href="@{/admin/user/index}">User</a>
+                            <span class="breadcrumb-item active">Add</span>
+                        </nav>
+                    </div>
+                    <div class="card-body">
+                       
+                        <form action="" method="post" th:object="${user}">
+                            <div class="form-group">
+                                <label for="">Username</label>
+                                <input type="text" value="" th:field="*{username}"  class="form-control" id="" placeholder="" />
+                                <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Password</label>
+                                <input type="text" value="" th:field="*{password}"  class="form-control" id="" placeholder="" />
+                                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Fullname</label>
+                                <input type="text" value="" th:field="*{fullName}"  class="form-control" id="" placeholder="" />
+                                <div class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Role</label><br />
+																<div class="form-check form-check-inline" th:each="role : ${roles}">
+																	  <input th:checked="${#lists.contains(oldRoleIds, role.id)}" name="roleIds" th:value="${role.id}" class="form-check-input" type="checkbox"  th:id="'role-' + ${role.name}">
+																	  <label class="form-check-label" th:for="'role-' + ${role.name}" th:text="${role.name}"></label>
+																</div>
+																<div class="error" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+														</div>
+
+                            <button type="submit" class="btn btn-sm btn-secondary">Edit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script th:src="@{/adminUrl/js/jquery-3.3.1.js}"></script>
+    <script th:src="@{/adminUrl/js/bootstrap.js}"></script>
+    <script th:src="@{/adminUrl/js/popper.min.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select').change(function() {
+                var value = $(this).val();
+                var color = $("option[value='" + value + "']").css("color");
+                $(this).css("color", color);
+            }); 
+        }); 
+    </script>
+</body>
+
+</html>

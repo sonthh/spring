@@ -1,0 +1,113 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Spring</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/adminUrl/css/bootstrap.css}" type="text/css">
+    <link rel="stylesheet" th:href="@{/adminUrl/css/style.css}" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" />
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+                    <div class="collapse navbar-collapse" id="">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li th:class="nav-item" th:classappend="${categoryLinkActive} ? 'active'">
+                                <a class="nav-link" th:href="@{/admin/category/index}">Category</a>
+                            </li>
+                            <li th:class="nav-item" th:classappend="${userLinkActive} ? 'active'">
+                                <a class="nav-link" th:href="@{/admin/user/index}">User</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <nav class="breadcrumb">
+                            <a class="breadcrumb-item" th:href="@{/admincp}">Admin</a>
+                            <a class="breadcrumb-item" th:href="@{/admin/user/index}">User</a>
+                            <span class="breadcrumb-item active">Add</span>
+                        </nav>
+                    </div>
+                    <div class="card-body">
+                        <a class="btn btn-sm btn-secondary mb-2" th:href="@{/admin/user/add}">Add</a>
+                        
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Id</th>
+                                    <th>Username</th>
+                                    <th>Fullname</th>
+                                    <th>Aciton</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="user, iter : ${users}">
+                                    <td th:text="${iter.index + 1}"></td>
+                                    <td th:text="${user.id}"></td>
+                                    <td th:text="${user.username}"></td>
+                                    <td th:text="${user.fullName}"></td>
+                                    <td>
+                                        <a class="btn btn-sm btn-secondary" th:href="@{'/admin/user/edit/'} + ${user.id} + '/page/' + ${page}">Edit</a>
+                                        <a th:onclick="'return confirm(\'Bạn có muốn xóa\')'" class="btn btn-sm btn-danger" th:href="@{/admin/user/delete/} + ${user.id}">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <nav aria-label="Page navigation">
+                                        <ul class="d-flex justify-content-end pagination pagination-sm">
+
+                                            <li class="page-item" th:classappend="${page} == 1 ? disabled">
+                                                <a class="page-link" th:href="@{${page} == 1 ? '#' : '/admin/user/index?page=' + ${page - 1}}">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                            </li>
+
+                                            <li class="page-item" th:classappend="${i} == ${page} ? active" th:each="i: ${#numbers.sequence(1, numberOfPages)}">
+                                                <a th:if="${i == 1}" class="page-link" th:text="${i}" th:href="@{'/admin/user/index'}"></a>
+                                                <a th:if="${i != 1}" class="page-link" th:text="${i}" th:href="@{'/admin/user/index?page=' + ${i}}"></a>
+                                            </li>
+                                            
+
+                                            <li class="page-item" th:classappend="${page} == ${numberOfPages} ? disabled">
+                                               <a class="page-link" th:href="@{${page} == ${numberOfPages} ? '#' : '/admin/user/index?page=' + ${page + 1}}">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<!-- <div th:text="${#request.getParameter('page')}"></div> -->
+<!-- <div th:text="${param.page[0]}"></div> -->
+
+    <script th:src="@{/adminUrl/js/jquery-3.3.1.js}"></script>
+    <script th:src="@{/adminUrl/js/bootstrap.js}"></script>
+    <script th:src="@{/adminUrl/js/popper.min.js}"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+        	  $('select').change(function() {
+        		    var value = $(this).val();
+        		    var color = $("option[value='" + value + "']").css("color");
+        		    $(this).css("color", color);
+        	  });	
+        }); 
+    </script>
+</body>
+</html>
