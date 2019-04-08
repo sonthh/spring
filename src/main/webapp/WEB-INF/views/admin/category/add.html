@@ -1,81 +1,35 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <title>Spring</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" th:href="@{/adminUrl/css/bootstrap.css}" type="text/css">
-    <link rel="stylesheet" th:href="@{/adminUrl/css/style.css}" type="text/css">
-</head>
-
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                    <div class="collapse navbar-collapse" id="">
-                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                            <li th:class="nav-item" th:classappend="${categoryLinkActive} ? 'active'">
-                                <a class="nav-link" th:href="@{/admin/category/index}">Category</a>
-                            </li>
-                            <li th:class="nav-item" th:classappend="${userLinkActive} ? 'active'">
-                                <a class="nav-link" th:href="@{/admin/user/index}">User</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <nav class="breadcrumb">
-                            <a class="breadcrumb-item" th:href="@{/admincp}">Admin</a>
-                            <a class="breadcrumb-item" th:href="@{/admin/category/index}">Category</a>
-                            <span class="breadcrumb-item active">Add</span>
-                        </nav>
-                    </div>
-                    <div class="card-body">
-                       
-                        <form action="" method="post" th:object="${category}">
-                            <div class="form-group">
-                                <label for="">Tên</label>
-                                <input type="text" value="" th:field="*{name}"  class="form-control" id="" placeholder="" />
-                                <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Parent Id</label>
-                                <select class="custom-select" th:field="*{parentId}">
-                                  <th:block th:remove="tag" th:utext="${renderSelectMenuService.printAllSelect()}"></th:block>
-                                </select>
-                                <div class="error" th:if="${#fields.hasErrors('parentId')}" th:errors="*{parentId}"></div>
-                            </div>
-                            <div class="form-group">
-                                <label for="">Sort</label>
-                                <input type="number" value="" class="form-control" th:field="*{sort}" id="" placeholder="" />
-                                <div class="error" th:if="${#fields.hasErrors('sort')}" th:errors="*{sort}"></div>
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-secondary">Add</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{../templates/admin/template}"
+    layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <nav class="breadcrumb">
+                <a class="breadcrumb-item" th:href="@{/admincp}">Admin</a>
+                <a class="breadcrumb-item" th:href="@{/admin/category/index}">Category</a>
+                <span class="breadcrumb-item active">Add</span>
+            </nav>
         </div>
+        <div class="card-body">
 
+            <form action="" method="post" th:object="${category}">
+                <div class="form-group">
+                    <label for="">T�n</label>
+                    <input type="text" value="" th:field="*{name}" class="form-control" id="" placeholder="" />
+                    <div class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="">Parent Id</label>
+                    <select class="custom-select" th:field="*{parentId}">
+                        <th:block th:remove="tag" th:utext="${renderSelectMenuService.printAllSelect()}"></th:block>
+                    </select>
+                    <div class="error" th:if="${#fields.hasErrors('parentId')}" th:errors="*{parentId}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="">Sort</label>
+                    <input type="number" value="" class="form-control" th:field="*{sort}" id="" placeholder="" />
+                    <div class="error" th:if="${#fields.hasErrors('sort')}" th:errors="*{sort}"></div>
+                </div>
+                <button type="submit" class="btn btn-sm btn-secondary">Add</button>
+            </form>
+        </div>
     </div>
-
-
-    <script th:src="@{/adminUrl/js/jquery-3.3.1.js}"></script>
-    <script th:src="@{/adminUrl/js/bootstrap.js}"></script>
-    <script th:src="@{/adminUrl/js/popper.min.js}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('select').change(function() {
-                var value = $(this).val();
-                var color = $("option[value='" + value + "']").css("color");
-                $(this).css("color", color);
-            }); 
-        }); 
-    </script>
-</body>
-
-</html>
+</th:block>
