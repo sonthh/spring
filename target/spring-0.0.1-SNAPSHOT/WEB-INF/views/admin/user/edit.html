@@ -1,0 +1,43 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{../templates/admin/template}"
+    layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <nav class="breadcrumb">
+                <a class="breadcrumb-item" th:href="@{/admincp}">Admin</a>
+                <a class="breadcrumb-item" th:href="@{/admin/user/index}">User</a>
+                <span class="breadcrumb-item active">Add</span>
+            </nav>
+        </div>
+        <div class="card-body">
+
+            <form action="" method="post" th:object="${user}">
+                <div class="form-group">
+                    <label for="">Username</label>
+                    <input type="text" value="" th:field="*{username}" class="form-control" id="" placeholder="" />
+                    <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="text" value="" th:field="*{password}" class="form-control" id="" placeholder="" />
+                    <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="">Fullname</label>
+                    <input type="text" value="" th:field="*{fullName}" class="form-control" id="" placeholder="" />
+                    <div class="error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></div>
+                </div>
+                <div class="form-group">
+                    <label for="">Role</label><br />
+                    <div class="form-check form-check-inline" th:each="role : ${roles}">
+                        <input th:checked="${#lists.contains(oldRoleIds, role.id)}" name="roleIds" th:value="${role.id}"
+                            class="form-check-input" type="checkbox" th:id="'role-' + ${role.name}">
+                        <label class="form-check-label" th:for="'role-' + ${role.name}" th:text="${role.name}"></label>
+                    </div>
+                    <div class="error" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+                </div>
+
+                <button type="submit" class="btn btn-sm btn-secondary">Edit</button>
+            </form>
+        </div>
+    </div>
+</th:block>

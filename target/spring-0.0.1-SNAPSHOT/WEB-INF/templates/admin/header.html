@@ -1,0 +1,16 @@
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="header" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="collapse navbar-collapse" id="">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li th:class="nav-item" th:classappend="${categoryLinkActive} ? 'active'">
+                    <a class="nav-link" th:href="@{/admin/category/index}">Category</a>
+                </li>
+                <li th:class="nav-item" th:classappend="${userLinkActive} ? 'active'">
+                    <a class="nav-link" th:href="@{/admin/user/index}">User</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+</th:block>

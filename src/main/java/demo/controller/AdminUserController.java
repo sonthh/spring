@@ -38,8 +38,8 @@ public class AdminUserController {
 	public void commonObject(ModelMap modelMap) {
 		modelMap.addAttribute("userLinkActive", true);
 		
-		List<Role> roles = new ArrayList<>();
-		roleRepository.findAll().forEach(r -> roles.add(r));
+		List<Role> roles = new ArrayList<Role>();
+		//roleRepository.findAll().forEach(r -> roles.add(r));
 		modelMap.addAttribute("roles", roles);
 	}
 
@@ -98,8 +98,8 @@ public class AdminUserController {
 	@GetMapping("edit/{id}/page/{page}")
 	public String edit(@PathVariable("id") Integer id, @PathVariable("page") Integer page, ModelMap modelMap) {
 		User user= userRepository.findById(id).get();
-		List<Integer> oldRoleIds = new ArrayList<>();
-		user.getRoles().forEach(r -> oldRoleIds.add(r.getId()));
+		List<Integer> oldRoleIds = new ArrayList<Integer>();
+		//user.getRoles().forEach(r -> oldRoleIds.add(r.getId()));
 		modelMap.addAttribute("user", user);
 		modelMap.addAttribute("oldRoleIds", oldRoleIds);
 		return "admin/user/edit";
@@ -134,6 +134,5 @@ public class AdminUserController {
 		userRepository.deleteById(id);
 		return "redirect:/admin/user/index";
 	}
-
 
 }
