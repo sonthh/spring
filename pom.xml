@@ -31,12 +31,14 @@
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-context</artifactId>
       <version>${spring.version}</version>
     </dependency>
+
     <!-- HỖ TRỢ VelocityEngineFactory Ở PHIÊN BẢN 4.1.4 -->
     <dependency>
       <groupId>org.springframework</groupId>
@@ -44,7 +46,7 @@
       <version>4.1.4.RELEASE</version>
     </dependency>
 
-    <!-- SERVLET API, GIỐNG NHƯ KHI TẠO DYNAMIC WEB PROJECT -->
+    <!-- SERVLET API, GIỐNG NHƯ KHI TẠO DYNAMIC WEB PROJECT VỚI CÁC THƯ VIỆN VỚI TOMCAT BUILL PATH -->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
