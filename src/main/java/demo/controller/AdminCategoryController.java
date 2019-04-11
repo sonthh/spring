@@ -2,6 +2,7 @@ package demo.controller;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,15 +34,20 @@ public class AdminCategoryController {
 
 	@Autowired
 	private RenderSelectMenuService renderSelectMenuService;
+
+	@Autowired
+	private ServletContext servletContext;
 	
 	@ModelAttribute
 	public void commonObject(ModelMap modelMap) {
+		System.out.println("AdminCategoryController.commonObject");
 		modelMap.addAttribute("categoryLinkActive", true);
 		modelMap.addAttribute("renderSelectMenuService", renderSelectMenuService);
 	}
 
 	@GetMapping("index")
 	public String index(@RequestParam(name = "page", required = false) Integer page,ModelMap modelMap) {
+		System.out.println(servletContext.getRealPath(""));
 		if (page == null) {
 			page = 1;
 		}
