@@ -14,6 +14,9 @@ public class ActicleService {
     @Autowired
     private ActicleRepository acticleRepository;
 
+    /*
+    * java8
+    * */
     public List<Acticle> findAll() {
         List<Acticle> acticles = new ArrayList<>();
         acticleRepository.findAll().forEach(x -> {
