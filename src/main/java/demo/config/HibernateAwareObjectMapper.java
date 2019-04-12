@@ -16,5 +16,6 @@ public class HibernateAwareObjectMapper extends ObjectMapper {
 		// This for Hibernate 5; change 5 to 4 or 3 if you need to support
 		// Hibernate 4 or Hibernate 3 instead
 		registerModule(new Hibernate5Module());
+		//this.pre
 	}
 }

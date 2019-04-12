@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/main/resources/configs/validate.properties=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/category/index.html=UTF-8
+encoding//src/main/webapp/WEB-INF/views/admin/user/index.html=UTF-8
+encoding/<project>=UTF-8

@@ -16,21 +16,23 @@
 				<property name="objectMapper">
 					<bean class="demo.config.HibernateAwareObjectMapper" />
 				</property>
+				<property name="prettyPrint" value="true" />
 			</bean>
 		</mvc:message-converters>
 	</mvc:annotation-driven>
+
 	<context:component-scan base-package="demo.*" />
 	<mvc:resources location="/WEB-INF/resources/"
 		mapping="/resources/**" />
 	<mvc:resources location="/WEB-INF/resources/public/"
-		mapping="/publicUrl/**"></mvc:resources>
+		mapping="/publicUrl/**" />
 	<mvc:resources location="/WEB-INF/resources/admin/"
-		mapping="/adminUrl/**"></mvc:resources>
+		mapping="/adminUrl/**" />
 
 	<mvc:resources location="/WEB-INF/libraries/"
-		mapping="/libraries/**"></mvc:resources>
-	<mvc:resources location="/uploads/" mapping="/uploads/**"></mvc:resources>
+		mapping="/libraries/**" />
+	<mvc:resources location="/uploads/" mapping="/uploads/**" />
 	<mvc:resources location="/WEB-INF/files/"
-		mapping="/files/**"></mvc:resources>
+		mapping="/files/**" />
 
 </beans>
