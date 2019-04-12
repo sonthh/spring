@@ -40,7 +40,7 @@ public class AdminCategoryController {
 	
 	@ModelAttribute
 	public void commonObject(ModelMap modelMap) {
-		System.out.println("AdminCategoryController.commonObject");
+		System.out.println("AdminCategoryController.commonObjectaaaaaaaaaaa");
 		modelMap.addAttribute("categoryLinkActive", true);
 		modelMap.addAttribute("renderSelectMenuService", renderSelectMenuService);
 	}

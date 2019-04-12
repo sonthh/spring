@@ -95,4 +95,6 @@ public class Acticle {
 				+ ", detail=" + detail + ", slug=" + slug + "]";
 	}
 
+
+
 }

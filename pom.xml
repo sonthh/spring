@@ -1,195 +1,219 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.demo</groupId>
-  <artifactId>spring</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>8</source>
-          <target>8</target>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <packaging>war</packaging>
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.demo</groupId>
+	<artifactId>spring</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<packaging>war</packaging>
 
 
 
-  <properties>
-    <spring.version>5.0.2.RELEASE</spring.version>
-  </properties>
-  <dependencies>
-    <!-- THƯ VIỆN CỦA SPRING MVC -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-webmvc</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
+	<properties>
+		<spring.version>5.0.2.RELEASE</spring.version>
+	</properties>
+	<dependencies>
+		<!-- THƯ VIỆN CỦA SPRING MVC -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
 
-    <!-- HỖ TRỢ VelocityEngineFactory Ở PHIÊN BẢN 4.1.4 -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context-support</artifactId>
-      <version>4.1.4.RELEASE</version>
-    </dependency>
+		<!-- HỖ TRỢ VelocityEngineFactory Ở PHIÊN BẢN 4.1.4 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>4.1.4.RELEASE</version>
+		</dependency>
 
-    <!-- SERVLET API, GIỐNG NHƯ KHI TẠO DYNAMIC WEB PROJECT VỚI CÁC THƯ VIỆN VỚI TOMCAT BUILL PATH -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>javax.servlet-api</artifactId>
-      <version>3.0.1</version>
-      <scope>provided</scope>
-    </dependency>
+		<!-- SERVLET API, GIỐNG NHƯ KHI TẠO DYNAMIC WEB PROJECT VỚI CÁC THƯ VIỆN 
+			VỚI TOMCAT BUILL PATH -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
 
-    <!-- JSP API: MỚI DÙNG ĐƯỢC pageContext.request.contextPath -->
-    <dependency>
-      <groupId>javax.servlet.jsp</groupId>
-      <artifactId>javax.servlet.jsp-api</artifactId>
-      <version>2.3.1</version>
-      <scope>provided</scope>
-    </dependency>
+		<!-- JSP API: MỚI DÙNG ĐƯỢC pageContext.request.contextPath -->
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>javax.servlet.jsp-api</artifactId>
+			<version>2.3.1</version>
+			<scope>provided</scope>
+		</dependency>
 
 
-    <!-- THƯ VIỆN JSTL -->
-    <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>jstl</artifactId>
-      <version>1.2</version>
-    </dependency>
+		<!-- THƯ VIỆN JSTL -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 
-    <!-- SPRING JDBC ĐỂ DÙNG JDBCTEMPLATE -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-jdbc</artifactId>
-      <version>5.0.2.RELEASE</version>
-    </dependency>
+		<!-- SPRING JDBC ĐỂ DÙNG JDBCTEMPLATE -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>5.0.2.RELEASE</version>
+		</dependency>
 
-    <!-- CÁC THƯ VIỆN NHƯ JDBCTEMPLATE HAY HIBERNATE ĐỀU BẮT NGUỒN TỪ MYSQL-CONNECTOR 
-      BẮT BUỘC CÓ -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>6.0.6</version>
-    </dependency>
+		<!-- CÁC THƯ VIỆN NHƯ JDBCTEMPLATE HAY HIBERNATE ĐỀU BẮT NGUỒN TỪ MYSQL-CONNECTOR 
+			BẮT BUỘC CÓ -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>6.0.6</version>
+		</dependency>
 
-    <!-- THƯ VIỆN HIBERNATE MAPPING CƠ SỞ DỮ LIỆU -->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>5.3.7.Final</version>
-    </dependency>
+		<!-- THƯ VIỆN HIBERNATE MAPPING CƠ SỞ DỮ LIỆU -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.3.7.Final</version>
+		</dependency>
 
-    <!-- SPRING-TX (TX: TRANSACTION) QUẢN LÍ TRANSACTION: CÓ THỂ LÀM VIỆC VỚI 
-      JDBCTEMPLATE HOẶC HIBERNATE -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-tx</artifactId>
-      <version>5.1.3.RELEASE</version>
-    </dependency>
+		<!-- SPRING-TX (TX: TRANSACTION) QUẢN LÍ TRANSACTION: CÓ THỂ LÀM VIỆC VỚI 
+			JDBCTEMPLATE HOẶC HIBERNATE -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>5.1.3.RELEASE</version>
+		</dependency>
 
-    <!-- SPRING ORM: PHẢI CÓ KHI LÀM VIỆC VỚI ORM FRAMEWORK NHƯ HIBERNATE -->
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-orm</artifactId>
-      <version>5.1.3.RELEASE</version>
-    </dependency>
+		<!-- SPRING ORM: PHẢI CÓ KHI LÀM VIỆC VỚI ORM FRAMEWORK NHƯ HIBERNATE -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>5.1.3.RELEASE</version>
+		</dependency>
 
-    <!-- HIBERNATE VALIDATOR -->
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-validator</artifactId>
-      <version>6.0.13.Final</version>
-    </dependency>
+		<!-- HIBERNATE VALIDATOR -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.0.13.Final</version>
+		</dependency>
 
-    <!-- UPLOAD FILE IN SPRING -->
-    <dependency>
-      <groupId>commons-fileupload</groupId>
-      <artifactId>commons-fileupload</artifactId>
-      <version>1.3.3</version>
-    </dependency>
+		<!-- UPLOAD FILE IN SPRING -->
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3.3</version>
+		</dependency>
 
-    <!-- TILES VIEW TÁCH GHÉP GIAO DIỆN -->
-    <dependency>
-      <groupId>org.apache.tiles</groupId>
-      <artifactId>tiles-jsp</artifactId>
-      <version>3.0.8</version>
-    </dependency>
+		<!-- TILES VIEW TÁCH GHÉP GIAO DIỆN -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>3.0.8</version>
+		</dependency>
 
-    <!-- START CẦN CHO CKFINDER -->
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4.1</version>
-    </dependency>
-    <dependency>
-      <groupId>net.coobird</groupId>
-      <artifactId>thumbnailator</artifactId>
-      <version>0.4.8</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.8.5</version>
-    </dependency>
-    <!-- END CẦN CHO CKFINDER -->
+		<!-- START CẦN CHO CKFINDER -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.1</version>
+		</dependency>
+		<dependency>
+			<groupId>net.coobird</groupId>
+			<artifactId>thumbnailator</artifactId>
+			<version>0.4.8</version>
+		</dependency>
+		<!--<dependency> <groupId>com.google.code.gson</groupId> <artifactId>gson</artifactId> 
+			<version>2.8.5</version> </dependency> -->
+		<!-- END CẦN CHO CKFINDER -->
 
-    <dependency>
-      <groupId>org.apache.velocity</groupId>
-      <artifactId>velocity</artifactId>
-      <version>1.7</version>
-    </dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
+		</dependency>
 
-    <dependency>
-      <groupId>org.apache.velocity</groupId>
-      <artifactId>velocity-tools</artifactId>
-      <version>2.0</version>
-    </dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
+		</dependency>
 
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4.3</version>
-    </dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4.3</version>
+		</dependency>
 
-    <!-- Thymeleaf -->
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf</artifactId>
-      <version>3.0.9.RELEASE</version>
-    </dependency>
-    <dependency>
-      <groupId>org.thymeleaf</groupId>
-      <artifactId>thymeleaf-spring5</artifactId>
-      <version>3.0.9.RELEASE</version>
-    </dependency>
+		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+			<version>3.0.9.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring5</artifactId>
+			<version>3.0.9.RELEASE</version>
+		</dependency>
 
-    <!-- SPRING DATA JPA -->
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>2.1.0.RELEASE</version>
-    </dependency>
+		<!-- SPRING DATA JPA -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
 
-    <!-- tách ghép giao diện thymeleaf -->
-    <dependency>
-      <groupId>nz.net.ultraq.thymeleaf</groupId>
-      <artifactId>thymeleaf-layout-dialect</artifactId>
-      <version>2.3.0</version>
-    </dependency>
+		<!-- tách ghép giao diện thymeleaf -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>2.3.0</version>
+		</dependency>
 
-  </dependencies>
+		<!-- RESTFUL JSON -->
+		<!-- JSON-Binding -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+		<!-- có thể ko thêm 2 dependency dưới vì dependency trên đã bao gồm -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.9.3</version>
+		</dependency>
+
+		<!-- jackson nhưng bỏ qua fetch type layzy trong hibernate-->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate5</artifactId>
+			<version>2.9.8</version>
+		</dependency>
+
+	</dependencies>
 
 </project>

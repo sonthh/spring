@@ -6,15 +6,31 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-    
-	<mvc:annotation-driven enable-matrix-variables="true" ignore-default-model-on-redirect="true" />
-	<context:component-scan base-package="demo.*"/>
-	<mvc:resources location="/WEB-INF/resources/" mapping="/resources/**" />
-	<mvc:resources location="/WEB-INF/resources/public/" mapping="/publicUrl/**"></mvc:resources>
-	<mvc:resources location="/WEB-INF/resources/admin/" mapping="/adminUrl/**"></mvc:resources>
-	
-	<mvc:resources location="/WEB-INF/libraries/" mapping="/libraries/**"></mvc:resources>
+
+	<mvc:annotation-driven
+		enable-matrix-variables="true" ignore-default-model-on-redirect="true">
+		<mvc:message-converters>
+			<!-- Use the HibernateAware mapper instead of the default -->
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="objectMapper">
+					<bean class="demo.config.HibernateAwareObjectMapper" />
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<context:component-scan base-package="demo.*" />
+	<mvc:resources location="/WEB-INF/resources/"
+		mapping="/resources/**" />
+	<mvc:resources location="/WEB-INF/resources/public/"
+		mapping="/publicUrl/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/resources/admin/"
+		mapping="/adminUrl/**"></mvc:resources>
+
+	<mvc:resources location="/WEB-INF/libraries/"
+		mapping="/libraries/**"></mvc:resources>
 	<mvc:resources location="/uploads/" mapping="/uploads/**"></mvc:resources>
-	<mvc:resources location="/WEB-INF/files/" mapping="/files/**"></mvc:resources>
+	<mvc:resources location="/WEB-INF/files/"
+		mapping="/files/**"></mvc:resources>
 
 </beans>

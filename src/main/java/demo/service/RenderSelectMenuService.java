@@ -18,8 +18,6 @@ public class RenderSelectMenuService {
 	
 	@Autowired
 	private HttpServletRequest request;
-	
-	
 
 	public String printChildMenu(int parentId) {
 		List<Category> categories = categoryRepository.findByParentId(parentId);
