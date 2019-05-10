@@ -1,8 +1,8 @@
 <th:block
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
 	xmlns:th="http://www.thymeleaf.org" 
-	th:fragment="header" 
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	th:fragment="header"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="collapse navbar-collapse" id="">
@@ -20,7 +20,7 @@
         	</div>
         	<form th:action="@{/logout}" method="post">
 			    <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
-			    <button type="submit" value="Logout" >Logout</button>
+			    <button class="btn btn-danger btn-sm" type="submit" value="Logoutxxxxxxxxxx" >Logout</button>
   			</form>
         </th:block>
         <th:block sec:authorize="!isAuthenticated()">

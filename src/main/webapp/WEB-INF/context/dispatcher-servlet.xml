@@ -46,13 +46,13 @@
 	<bean id="templateEngine"
 		class="org.thymeleaf.spring5.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
-		<property name="additionalDialects"><!-- property này dùng decorator tách ghép giao 
+		<property name="additionalDialects"><!-- property này dùng decorator tách ghép giao
 				diện cho thymeleaf -->
 			<set>
 				<bean class="nz.net.ultraq.thymeleaf.LayoutDialect">
 					<constructor-arg ref="groupingStrategy" />
 				</bean>
-				<!-- Note the package would change to 'springsecurity[3|4]' if you are 
+				<!-- Note the package would change to 'springsecurity[3|4]' if you are
 					using that version -->
 				<bean
 					class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect" />

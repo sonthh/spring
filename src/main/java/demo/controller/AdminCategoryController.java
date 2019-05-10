@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import demo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -30,6 +31,8 @@ public class AdminCategoryController {
 
 	@Autowired
 	private CategoryRepository categoryRepository;
+	@Autowired
+	private CategoryService categoryService;
 
 	@Autowired
 	private RenderSelectMenuService renderSelectMenuService;
@@ -45,16 +48,17 @@ public class AdminCategoryController {
 
 	@GetMapping("index")
 	public String index(@RequestParam(name = "page", required = false) Integer page,ModelMap modelMap) {
+
 		if (page == null) {
 			page = 1;
 		}
-		
+
 		int numberOfItems = (int) categoryRepository.count();
 		int numberOfPages = (int) Math.ceil(numberOfItems * 1.0 / SystemConstant.PAGE_SIZE);
+
 		Sort sort = Sort.by("id").descending();
-		Pageable pageable = PageRequest.of(page - 1, SystemConstant.PAGE_SIZE, sort);
-		List<Category> categories = categoryRepository.findPagination(pageable);
-		
+		List<Category> categories = categoryService.findAllPagination(page, sort);
+
 		modelMap.addAttribute("categories", categories);
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("numberOfPages", numberOfPages);
@@ -90,7 +94,8 @@ public class AdminCategoryController {
 	}
 
 	@PostMapping("edit/{id}/page/{page}")
-	public String edit(@Valid @ModelAttribute("category") Category category, @PathVariable("page") Integer page, BindingResult errors) {
+	public String edit(@Valid @ModelAttribute("category") Category category,
+					   @PathVariable("page") Integer page, BindingResult errors) {
 		if (errors.hasErrors()) {
 			return "admin/category/add";
 		}
