@@ -14,33 +14,42 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "categories")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Acticle.class)
 public class Category {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@NotBlank(message = "Không được nhập rỗng")
 	private String name;
-	
+
 	@NotNull(message = "Không được nhập rỗng")
-	/*@Min(1)
-	@Max(10)*/
+	/*
+	 * @Min(1)
+	 * 
+	 * @Max(10)
+	 */
 	private Integer parentId;
-	
+
 	@NotNull(message = "Không được nhập rỗng")
-	/*@Min(1)
-	@Max(10)*/
+	/*
+	 * @Min(1)
+	 * 
+	 * @Max(10)
+	 */
 	private Integer sort;
-	
+
 	private String slug;
-	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId")
-//	@JsonIgnore
+	// @JsonIgnore
+	@JsonBackReference
+	//@JsonManagedReference
 	private List<Acticle> acticles;
 
 	public Integer getId() {

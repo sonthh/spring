@@ -2,7 +2,6 @@ package demo.controller;
 
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,33 +34,25 @@ public class AdminCategoryController {
 	@Autowired
 	private RenderSelectMenuService renderSelectMenuService;
 
-	@Autowired
-	private ServletContext servletContext;
+	/*@Autowired
+	private ServletContext servletContext;*/
 	
 	@ModelAttribute
 	public void commonObject(ModelMap modelMap) {
-		System.out.println("AdminCategoryController.commonObjectaaaaaaaaaaa");
 		modelMap.addAttribute("categoryLinkActive", true);
 		modelMap.addAttribute("renderSelectMenuService", renderSelectMenuService);
 	}
 
 	@GetMapping("index")
 	public String index(@RequestParam(name = "page", required = false) Integer page,ModelMap modelMap) {
-		System.out.println(servletContext.getRealPath(""));
 		if (page == null) {
 			page = 1;
 		}
 		
 		int numberOfItems = (int) categoryRepository.count();
-		//System.out.println(numberOfItems);
-		
-		int numberOfPages = (int) Math.ceil(numberOfItems * 1.0 / SystemConstant.pageSize);
-		//System.out.println(numberOfPages);
-		
+		int numberOfPages = (int) Math.ceil(numberOfItems * 1.0 / SystemConstant.PAGE_SIZE);
 		Sort sort = Sort.by("id").descending();
-
-		Pageable pageable = PageRequest.of(page - 1, SystemConstant.pageSize, sort);
-
+		Pageable pageable = PageRequest.of(page - 1, SystemConstant.PAGE_SIZE, sort);
 		List<Category> categories = categoryRepository.findPagination(pageable);
 		
 		modelMap.addAttribute("categories", categories);
@@ -75,6 +66,7 @@ public class AdminCategoryController {
 	public String add(Category category) {
 		return "admin/category/add";
 	}
+	
 	@GetMapping("view")
 	public String view() {
 		return "admin/category/view";
@@ -83,7 +75,6 @@ public class AdminCategoryController {
 	@PostMapping("add")
 	public String add(@Valid @ModelAttribute("category") Category category, BindingResult errors) {
 		if (errors.hasErrors()) {
-			System.out.println(category);
 			return "admin/category/add";
 		}
 		category.setSlug(SlugUtil.makeSlug(category.getName()));
@@ -103,7 +94,6 @@ public class AdminCategoryController {
 		if (errors.hasErrors()) {
 			return "admin/category/add";
 		}
-		System.out.println(category);
 		category.setSlug(SlugUtil.makeSlug(category.getName()));
 		categoryRepository.save(category);
 		return "redirect:/admin/category/index" + (page >  1 ? ("?page=" + page) : "");

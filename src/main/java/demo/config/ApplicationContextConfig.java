@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /*
-* config spring mvc using java code config instead xml config
+* CONFIG SPRING MVC USING JAVA CODE CONFIG INSTEAD XML CONFIG
 * */
 @Configuration
 public class ApplicationContextConfig {

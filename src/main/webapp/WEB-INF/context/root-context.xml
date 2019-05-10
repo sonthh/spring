@@ -9,8 +9,8 @@
 
 	<mvc:annotation-driven
 		enable-matrix-variables="true" ignore-default-model-on-redirect="true">
-		<mvc:message-converters>
-			<!-- Use the HibernateAware mapper instead of the default -->
+		<!-- <mvc:message-converters>
+			Use the HibernateAware mapper instead of the default
 			<bean
 				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 				<property name="objectMapper">
@@ -18,7 +18,7 @@
 				</property>
 				<property name="prettyPrint" value="true" />
 			</bean>
-		</mvc:message-converters>
+		</mvc:message-converters> -->
 	</mvc:annotation-driven>
 
 	<context:component-scan base-package="demo.*" />
@@ -34,5 +34,13 @@
 	<mvc:resources location="/uploads/" mapping="/uploads/**" />
 	<mvc:resources location="/WEB-INF/files/"
 		mapping="/files/**" />
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<mvc:exclude-mapping path="/admin/category/index"/><!-- ví dụ đường dẫn bỏ qua ko đi qua interceptor -->
+			<bean id="adminInterceptor" class="demo.interceptor.AdminInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 
 </beans>

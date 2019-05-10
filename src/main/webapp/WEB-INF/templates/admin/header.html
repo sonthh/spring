@@ -1,4 +1,8 @@
-<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="header" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security" 
+	xmlns:th="http://www.thymeleaf.org" 
+	th:fragment="header" 
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
         <div class="collapse navbar-collapse" id="">
@@ -11,6 +15,17 @@
                 </li>
             </ul>
         </div>
+        <th:block sec:authorize="isAuthenticated()">
+        	<div style="color: red" th:text="${T(demo.security.UserDetailsSecurityUtils).getMyUserDetails().getFullname()}">
+        	</div>
+        	<form th:action="@{/logout}" method="post">
+			    <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+			    <button type="submit" value="Logout" >Logout</button>
+  			</form>
+        </th:block>
+        <th:block sec:authorize="!isAuthenticated()">
+        	<div style="color: red">Vui lòng đăng nhập</div>
+        </th:block>
     </nav>
 
 </th:block>

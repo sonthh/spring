@@ -37,24 +37,29 @@
 		<property name="suffix" value=".html" />
 		<property name="templateMode" value="HTML" />
 		<property name="cacheable" value="false" />
+		<property name="characterEncoding" value="UTF-8" />
 	</bean>
 
-  <!-- bean này dùng decorator tách ghép giao diện cho thymeleaf -->
+	<!-- bean này dùng decorator tách ghép giao diện cho thymeleaf -->
 	<bean id="groupingStrategy"
 		class="nz.net.ultraq.thymeleaf.decorators.strategies.GroupingStrategy" />
 	<bean id="templateEngine"
 		class="org.thymeleaf.spring5.SpringTemplateEngine">
 		<property name="templateResolver" ref="templateResolver" />
-		<property name="additionalDialects"><!-- property này dùng decorator tách ghép giao diện cho thymeleaf -->
+		<property name="additionalDialects"><!-- property này dùng decorator tách ghép giao 
+				diện cho thymeleaf -->
 			<set>
 				<bean class="nz.net.ultraq.thymeleaf.LayoutDialect">
 					<constructor-arg ref="groupingStrategy" />
 				</bean>
+				<!-- Note the package would change to 'springsecurity[3|4]' if you are 
+					using that version -->
+				<bean
+					class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect" />
 			</set>
 		</property>
+		
 	</bean>
-	<!-- <bean class="nz.net.ultraq.thymeleaf.LayoutDialect"> <constructor-arg 
-		ref="groupingStrategy"/> </bean> -->
 	<bean class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
 		<property name="order" value="2" />
 		<property name="templateEngine" ref="templateEngine" />

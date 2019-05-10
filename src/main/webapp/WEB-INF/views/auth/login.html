@@ -1,0 +1,25 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{../templates/admin/template}"
+    layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <nav class="breadcrumb">
+                <a class="breadcrumb-item" th:href="@{/login}">Auth</a>
+                <span class="breadcrumb-item active">Login</span>
+            </nav>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/login}" method="post" >
+                <div class="form-group">
+                    <label for="">Username</label>
+                    <input type="text" name="username" value="" class="form-control" id="" placeholder="" />
+                </div>
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="text" name="password" value="" class="form-control" id="" placeholder="" />
+                </div>
+                <button type="submit" class="btn btn-sm btn-secondary">Login</button>
+                <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+            </form>
+        </div>
+    </div>
+</th:block>

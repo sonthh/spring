@@ -10,15 +10,15 @@ public class SlugUtil {
 		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
 		slug = pattern.matcher(slug).replaceAll("");
 		slug = slug.toLowerCase();
-		// Thay đ thành d
+		// THAY Đ THÀNH D
 		slug = slug.replaceAll("đ", "d");
-		// Xóa các ký tự đặt biệt
+		// XÓA CÁC KÝ TỰ ĐẶT BIỆT
 		slug = slug.replaceAll("([^0-9a-z-\\s])", "");
-		// Thay space thành dấu gạch ngang
+		// THAY SPACE THÀNH DẤU GẠCH NGANG
 		slug = slug.replaceAll("[\\s]", "-");
-		// Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+		// ĐỔI NHIỀU KÝ TỰ GẠCH NGANG LIÊN TIẾP THÀNH 1 KÝ TỰ GẠCH NGANG
 		slug = slug.replaceAll("(-+)", "-");
-		// Xóa các ký tự gạch ngang ở đầu và cuối
+		// XÓA CÁC KÝ TỰ GẠCH NGANG Ở ĐẦU VÀ CUỐI
 		slug = slug.replaceAll("^-+", "");
 		slug = slug.replaceAll("-+$", "");
 		return slug;

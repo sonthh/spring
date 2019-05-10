@@ -10,8 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "acticles")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id", scope = Category.class)
 public class Acticle {
 
 	@Id
@@ -20,6 +23,8 @@ public class Acticle {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "categoryId")
+	//@JsonManagedReference
+	@JsonBackReference
 	private Category category;
 
 	private String name;
@@ -94,7 +99,5 @@ public class Acticle {
 		return "Acticle [id=" + id + ", category=" + category + ", name=" + name + ", description=" + description
 				+ ", detail=" + detail + ", slug=" + slug + "]";
 	}
-
-
 
 }

@@ -23,6 +23,7 @@
 
 	<properties>
 		<spring.version>5.0.2.RELEASE</spring.version>
+		<springsecurity.version>4.2.8.RELEASE</springsecurity.version>
 	</properties>
 	<dependencies>
 		<!-- THƯ VIỆN CỦA SPRING MVC -->
@@ -31,8 +32,6 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.springframework/spring-context-support -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -75,7 +74,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-jdbc</artifactId>
-			<version>5.0.2.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<!-- CÁC THƯ VIỆN NHƯ JDBCTEMPLATE HAY HIBERNATE ĐỀU BẮT NGUỒN TỪ MYSQL-CONNECTOR 
@@ -98,14 +97,14 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
-			<version>5.1.3.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<!-- SPRING ORM: PHẢI CÓ KHI LÀM VIỆC VỚI ORM FRAMEWORK NHƯ HIBERNATE -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
-			<version>5.1.3.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 
 		<!-- HIBERNATE VALIDATOR -->
@@ -207,12 +206,43 @@
 			<version>2.9.8</version>
 		</dependency>
 
-		<!-- jackson nhưng bỏ qua fetch type layzy trong hibernate-->
+		<!-- jackson nhưng bỏ qua fetch type layzy trong hibernate -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate5</artifactId>
 			<version>2.9.8</version>
 		</dependency>
+
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-acl</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+
+		<!--spring taglibs -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${springsecurity.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+			<version>3.0.4.RELEASE</version>
+		</dependency>
+
 
 	</dependencies>
 

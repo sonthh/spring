@@ -54,7 +54,6 @@ public class RenderSelectMenuService {
 		StringBuilder result = new StringBuilder();
 		if (categories.size() > 0) {
 			for (Category category : categories) {
-//				String href = request.getContextPath() + "/admin/category/edit/" + category.getId();
 				result.append("<option value='"+category.getId()+"' class='option-level-" + level + "'>" + this.printSpace(level) + category.getName() + "</option>");
 				result.append(this.printOptionSelect(category.getId(), level + 1));
 			}
@@ -67,7 +66,6 @@ public class RenderSelectMenuService {
 		StringBuilder result = new StringBuilder();
 		result.append("<option class='option-level-0' value='0'>None</option>");
 		for (Category category : categories) {
-//			String href = request.getContextPath() + "/admin/category/edit/" + category.getId();
 			result.append("<option value='"+category.getId()+"' class='option-level-0'>" + this.printSpace(0) +  category.getName() + "</option>");
 			result.append(this.printOptionSelect(category.getId(), 1));
 		}

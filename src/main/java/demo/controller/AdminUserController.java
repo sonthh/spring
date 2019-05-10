@@ -39,7 +39,7 @@ public class AdminUserController {
 		modelMap.addAttribute("userLinkActive", true);
 		
 		List<Role> roles = new ArrayList<Role>();
-		//roleRepository.findAll().forEach(r -> roles.add(r));
+		roleRepository.findAll().forEach(r -> roles.add(r));
 		modelMap.addAttribute("roles", roles);
 	}
 
@@ -51,24 +51,23 @@ public class AdminUserController {
 		
 		int numberOfItems = (int) userRepository.count();
 		
-		int numberOfPages = (int) Math.ceil(numberOfItems * 1.0 / SystemConstant.pageSize);
+		int numberOfPages = (int) Math.ceil(numberOfItems * 1.0 / SystemConstant.PAGE_SIZE);
 		
 		Sort sort = Sort.by("id").descending();
 
-		Pageable pageable = PageRequest.of(page - 1, SystemConstant.pageSize, sort);
+		Pageable pageable = PageRequest.of(page - 1, SystemConstant.PAGE_SIZE, sort);
 
 		List<User> users = userRepository.findPagination(pageable);
-		//System.out.println(users.size());
 		modelMap.addAttribute("users", users);
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("numberOfPages", numberOfPages);
 		modelMap.addAttribute("numberOfItems", numberOfItems);
+		System.out.println("AdminUserController.index()");
 		return "admin/user/index";
 	}
 	
 	@GetMapping("add")
 	public String add(User user, ModelMap modelMap) {
-		
 		return "admin/user/add";
 	}
 	
@@ -83,7 +82,6 @@ public class AdminUserController {
 			errors.rejectValue("password", "user", "Password không được rỗng");
 		}
 		if (errors.hasErrors()) {
-			//System.out.println(user);
 			return "admin/user/add";
 		}
 		
@@ -99,7 +97,7 @@ public class AdminUserController {
 	public String edit(@PathVariable("id") Integer id, @PathVariable("page") Integer page, ModelMap modelMap) {
 		User user= userRepository.findById(id).get();
 		List<Integer> oldRoleIds = new ArrayList<Integer>();
-		//user.getRoles().forEach(r -> oldRoleIds.add(r.getId()));
+		user.getRoles().forEach(r -> oldRoleIds.add(r.getId()));
 		modelMap.addAttribute("user", user);
 		modelMap.addAttribute("oldRoleIds", oldRoleIds);
 		return "admin/user/edit";
@@ -108,7 +106,7 @@ public class AdminUserController {
 	@PostMapping("edit/{id}/page/{page}")
 	public String edit(@Valid @ModelAttribute("user") User user, BindingResult errors, 
 			@PathVariable("page") Integer page,
-			@RequestParam(name = "roleIds", required = false) List<Integer> roleIds) {
+			@RequestParam(name = "roleIds", required = false) List<Integer> roleIds, ModelMap modelMap) {
 		if (roleIds == null) {
 			errors.rejectValue("roles", "user", "Vui lòng chọn quyền");
 		}
@@ -117,7 +115,10 @@ public class AdminUserController {
 			errors.rejectValue("password", "user", "Password không được rỗng");
 		}
 		if (errors.hasErrors()) {
-			//System.out.println(user);
+			List<Integer> oldRoleIds = new ArrayList<Integer>();
+			//User oldUser = userRepository.findById(user.getId()).get();
+			//oldUser.getRoles().forEach(r -> oldRoleIds.add(r.getId()));
+			modelMap.addAttribute("oldRoleIds", oldRoleIds);
 			return "admin/user/edit";
 		}
 		

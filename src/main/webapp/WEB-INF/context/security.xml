@@ -1,0 +1,71 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd"
+		>
+
+	<http use-expressions="true">
+		<csrf disabled="false" /><!-- chống hacker tấn công thông qua các quyền -->
+		
+		<intercept-url pattern="/admin" access="hasAnyRole('ROLE_EDITOR', 'ROLE_ADMIN', 'ROLE_USER')" />
+		<intercept-url pattern="/admin/" access="hasAnyRole('ROLE_EDITOR', 'ROLE_ADMIN', 'ROLE_USER')" />
+		<intercept-url pattern="/admin/category/**" access="hasAnyRole('ROLE_EDITOR', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/land/**" access="hasAnyRole('ROLE_EDITOR', 'ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/user/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/admin/slide/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR', 'ROLE_USER')" />
+		<intercept-url pattern="/admin/contact/**" access="hasAnyRole('ROLE_ADMIN', 'ROLE_EDITOR')" />
+		<intercept-url pattern="/**" access="permitAll()" /><!-- để intercept này ở cuối cho những trang public -->
+		
+		<!-- 	
+			default-target-url="/admin/" đây là trang mặc định khi đăng nhập thành công thì sẽ được chuyển tới 
+			tuy nhiên always-use-default-target="false" nhớ lại đường dẫn người dùng gõ trước khi đăng nhập và chuyển tới trang đó
+			authentication-success-handler-ref="customAuthenticationSuccessHandler" sau khi đăng nhập thành công thì chạy đến bean
+			có id customAuthenticationSuccessHandler khai báo bean
+			authentication-success-handler-ref="myAuthenticationSuccessHandler"
+		 -->
+		 <!-- 
+		 	nếu dùng csrf thì logout-url="/logout" là method post
+		  -->
+		<form-login login-page='/login' login-processing-url="/login"
+			default-target-url="/admin/category/index" always-use-default-target="false"
+			authentication-failure-url="/login?error=loginErr"
+			username-parameter="username" password-parameter="password" />
+			
+		<logout logout-url="/logout" logout-success-url="/login"
+			delete-cookies="JSESSIONID" invalidate-session="true" />
+			
+		<access-denied-handler error-page="/403.html" />
+		
+		<!-- enable remember me -->
+	    <remember-me
+	     	key="uniqueAndSecret"
+	        token-validity-seconds="1209600"
+			remember-me-parameter="rememberme" />
+	</http>
+
+	<authentication-manager>
+		<!-- authentication from database -->
+		<authentication-provider user-service-ref="myUserDetailsService">
+			<password-encoder ref="bcryptEncoder" />
+			<!--  
+			<jdbc-user-service data-source-ref="ds"
+				users-by-username-query="select username, password, enable from users where username = ?"
+				authorities-by-username-query="
+	                select u.username, concat('ROLE_', r.name) AS role from users as u 
+					inner join roles as r 
+					on r.id = u.roleId 
+					where username = ?" />
+			-->
+		</authentication-provider>
+	</authentication-manager>
+	
+	<!-- mã hóa password: mỗi lần đăng nhập thì password thì sẽ ra một chuỗi mới mặc dù password không đổi -->
+	<beans:bean id="bcryptEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"></beans:bean>
+	
+	<beans:bean id="myUserDetailsService" class="demo.security.MyUserDetailsService" ></beans:bean>
+	<!-- <beans:bean id="myAuthenticationSuccessHandler" class="vn.edu.vinaenter.security.CustomAuthenticationSuccessHandler"></beans:bean> -->
+
+
+</beans:beans>
