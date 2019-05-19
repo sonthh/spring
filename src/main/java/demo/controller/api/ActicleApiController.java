@@ -24,9 +24,10 @@ public class ActicleApiController {
 	private ActicleService acticleService;
 
 
+
 	@GetMapping("acticles")
 	public List<Acticle> findAll() {
-		return acticleService.findAll();
+		return acticleService.findAll().subList(0, 2);
 	}
 
 	@GetMapping("acticles/{id}")

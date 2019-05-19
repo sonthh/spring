@@ -62,7 +62,7 @@ public class AdminUserController {
 		modelMap.addAttribute("page", page);
 		modelMap.addAttribute("numberOfPages", numberOfPages);
 		modelMap.addAttribute("numberOfItems", numberOfItems);
-		System.out.println("AdminUserController.index()");
+		//System.out.println("AdminUserController.index()");
 		return "admin/user/index";
 	}
 	

@@ -4,10 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import demo.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import demo.constant.SystemConstant;
 import demo.entity.Category;
 import demo.repository.CategoryRepository;
+import demo.service.CategoryService;
 import demo.service.RenderSelectMenuService;
 import demo.util.SlugUtil;
 
