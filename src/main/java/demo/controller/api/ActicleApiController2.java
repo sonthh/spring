@@ -19,8 +19,7 @@ public class ActicleApiController2 {
 	@Autowired
 	private ActicleService acticleService;
 	
-	//hongssontra sadfasf
-
+	//Học về api trong spring boot
 	@RequestMapping(path = "acticles", method = RequestMethod.GET)
 	public ResponseEntity<List<Acticle>> findAll() {
 		List<Acticle> acticles = acticleService.findAll();
