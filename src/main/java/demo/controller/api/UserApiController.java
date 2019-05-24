@@ -24,7 +24,7 @@ public class UserApiController {
 
 
 
-	@GetMapping("user/page/{page}")
+	@GetMapping("user/page/{page}")//
 	public List<User> findPagination(@PathVariable("page") Integer page) {
 		if (page == null) {
 			page = 1;

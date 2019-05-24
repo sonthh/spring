@@ -27,7 +27,7 @@ import demo.repository.UserRepository;
 
 @Controller
 @RequestMapping("admin/user")
-public class AdminUserController {
+public class AdminUserController {//
 
 	@Autowired
 	private UserRepository userRepository;

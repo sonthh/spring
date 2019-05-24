@@ -18,7 +18,7 @@ public class CategoryApiController {
 	@Autowired
 	private CategoryService categoryService;
 
-	@GetMapping("categories/{id}")
+	@GetMapping("categories/{id}")//
 	public Category findOneByIdAndGetActicles(@PathVariable("id") int id, HttpServletResponse response) {
 		Category category = categoryService.findOneByIdAndGetActicles(id);
 		if (category == null) {

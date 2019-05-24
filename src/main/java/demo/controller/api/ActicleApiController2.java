@@ -17,7 +17,7 @@ import demo.service.ActicleService;
 public class ActicleApiController2 {
 	
 	@Autowired
-	private ActicleService acticleService;
+	private ActicleService acticleService;//
 	
 	//Học về api trong spring boot/////
 	@RequestMapping(path = "acticles", method = RequestMethod.GET)
