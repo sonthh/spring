@@ -21,7 +21,7 @@ import demo.service.ActicleService;
 public class ActicleApiController {
 
 	@Autowired
-	private ActicleService acticleService;//
+	private ActicleService acticleService;/////
 
 
 
