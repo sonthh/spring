@@ -14,14 +14,14 @@
             <table class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Id</th>
-                        <th>Username</th>
-                        <th>Fullname</th>
-                        <th>Aciton</th>
+                        <th width="5%">#</th>
+                        <th width="10%">Id</th>
+                        <th width="25%">Username</th>
+                        <th width="30%">Fullname</th>
+                        <th width="30%">Aciton</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="tableUser">
                     <tr th:each="user, iter : ${users}">
                         <td th:text="${iter.index + 1}"></td>
                         <td th:text="${user.id}"></td>
@@ -38,10 +38,11 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <nav aria-label="Page navigation">
-                            <ul class="d-flex justify-content-end pagination pagination-sm">
+							<!-- <ul class="d-flex justify-content-end pagination pagination-sm">
 
-                                <li class="page-item" th:classappend="${page} == 1 ? disabled">
-                                    <a class="page-link" th:href="@{${page} == 1 ? '#' : '/admin/user/index?page=' + ${page - 1}}">
+
+                                <li id="btn-prev" class="page-item" th:classappend="${page} == 1 ? disabled">
+                                    <a  class="page-link" th:href="@{${page} == 1 ? '#' : '/admin/user/index?page=' + ${page - 1}}">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
                                 </li>
@@ -51,17 +52,119 @@
                                     <a th:if="${i != 1}" class="page-link" th:text="${i}" th:href="@{'/admin/user/index?page=' + ${i}}"></a>
                                 </li>
 
-
-                                <li class="page-item" th:classappend="${page} == ${numberOfPages} ? disabled">
+                                <li id="btn-next" class="page-item" th:classappend="${page} == ${numberOfPages} ? disabled">
                                     <a class="page-link" th:href="@{${page} == ${numberOfPages} ? '#' : '/admin/user/index?page=' + ${page + 1}}">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
                                 </li>
-                            </ul>
+                            </ul> -->
+                            
+                            <ul th:replace="../templates/admin/pagination :: pagination(${page}, ${numberOfPages}, '/admin/user/index')"></ul>
+                            
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script th:src="@{/adminUrl/js/jquery-3.3.1.js}"></script>
+    <script>
+        //$(".page-item").click(function (e) { //dùng cái này khi thay đổi code .page-item động thì nó ko hiểu onclick nữa
+        $(document).on('click', '.page-item:not(.disabled)', function(e) { 
+            e.preventDefault();
+            //console.log("xxxxxxxxxxxxxxxxxxxxxxxxx");
+            //biến page là trang đích sau khi click vào nút rồi truyền cho api
+           	var page = parseInt($(this).find('.page-link').text());
+           	//không phải là số thì là nút trái hoặc phải
+           	if (!Number.isInteger(page)) {
+           		var currentPage = parseInt($(".page-item.active").text());
+           		page = currentPage;
+           		if ($(this)[0] == $("#btn-next")[0]) {
+           			page++;
+           		} else if ($(this)[0] == $("#btn-prev")[0]) {
+           			page--;
+           		}
+           	}
+            //console.log(page);
+            $.ajax({
+                //url: "[[${#request.contextPath}]]/api/user/page/" + page,
+                url: "/api/user/page/" + page,
+                type: 'GET',
+                cache: false,
+                contentType: "application/json",
+                data: {
+                },
+                success: function(data){
+                    //console.log(data);
+                    //tạo table
+                    var html = "";
+                    $.each(data, function(i, item) {
+                        var urlEdit = "[[${#request.contextPath}]]/admin/user/edit/" + item.id + "/page/" + page;
+                        var urlDel = "[[${#request.contextPath}]]/admin/user/delete/" + item.id;
+                        html +=
+                        "<tr>" +
+                            "<td>" + (i + 1) + "</td>" +
+                            "<td>" + item.id + "</td>" +
+                            "<td>" + item.username + "</td>" +
+                            "<td>" + item.fullName + "</td>" +
+                            "<td>" +
+                                "<a class='btn btn-sm btn-secondary' href='" + urlEdit + "'>Edit</a>\n" +
+                                "<a onclick=\"return confirm('Bạn có muốn xóa')\" class='btn btn-sm btn-danger' href='" + urlDel + "'>Delete</a>" +
+                            "</td>" +
+                        "</tr>";
+                    });
+                    //console.log(html);
+                    $("#tableUser").html(html);
+
+                    
+                    //tạo nút prev
+                    var hasClass = "";
+                    if (page == 1) hasClass = "disabled"
+                    html = "";
+                    html +=
+                        "<li id='btn-prev' class='page-item " + hasClass + "'>" +
+		                    "<a  class='page-link' href='[[${#request.contextPath}]]/admin/user/index?page=" + (page - 1) + "'>" +
+		                        "<span aria-hidden='true'>&laquo;</span>" +
+		                    "</a>"
+		                "</li>";
+		                
+		           //tạo các nút số
+		           for (var i = 1; i <= $(".page-item").length - 2; i++) {
+		            	hasClass = ""; 
+		            	var link = "[[${#request.contextPath}]]/admin/user/index";
+		            	if (i == page) {
+		            		hasClass = "active";
+		            		link += "?page=" + page;
+		            	}
+		            	html +=
+	                        "<li class='page-item " + hasClass + "'>" +
+			                    "<a class='page-link' href='" + link + "'>" + (i) + "</a>" +
+			                "</li>"
+			        }
+		           
+		           //tạo nut next
+		            var hasClass = "";
+                    if (page == $(".page-item").length - 2) hasClass = "disabled"
+                    html +=
+                        "<li id='btn-next' class='page-item " + hasClass + "'>" +
+		                    "<a  class='page-link' href='[[${#request.contextPath}]]/admin/user/index?page=" + (page + 1) + "'>" +
+		                        "<span aria-hidden='true'>&raquo;</span>" +
+		                    "</a>"
+		                "</li>";
+		            $(".pagination").html(html);
+                },
+                error: function (){
+                    console.log("co loi");
+                }
+            });
+
+            var urlChange = "[[${#request.requestURI}]]";
+            if (page > 1) {
+                urlChange += "?page=" + page;
+            }
+            window.history.pushState(null, "", urlChange);
+        });
+    </script>
+
 </th:block>

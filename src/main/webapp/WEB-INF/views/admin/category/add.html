@@ -9,7 +9,7 @@
             </nav>
         </div>
         <div class="card-body">
-
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
             <form action="" method="post" th:object="${category}">
                 <div class="form-group">
                     <label for="">Name</label>

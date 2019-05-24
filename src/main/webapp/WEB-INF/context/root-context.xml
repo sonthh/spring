@@ -35,12 +35,12 @@
 	<mvc:resources location="/WEB-INF/files/"
 		mapping="/files/**" />
 
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/admin/**"/>
-			<mvc:exclude-mapping path="/admin/category/index"/><!-- ví dụ đường dẫn bỏ qua ko đi qua interceptor -->
-			<bean id="adminInterceptor" class="demo.interceptor.AdminInterceptor"></bean>
-		</mvc:interceptor>
-	</mvc:interceptors>
+	<!--<mvc:interceptors>-->
+		<!--<mvc:interceptor>-->
+			<!--<mvc:mapping path="/admin/**"/>-->
+			<!--<mvc:exclude-mapping path="/admin/category/index"/>&lt;!&ndash; ví dụ đường dẫn bỏ qua ko đi qua interceptor &ndash;&gt;-->
+			<!--<bean id="adminInterceptor" class="demo.interceptor.AdminInterceptor"></bean>-->
+		<!--</mvc:interceptor>-->
+	<!--</mvc:interceptors>-->
 
 </beans>

@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
 <head>
     <meta charset="utf-8">
+    <meta name="context-path" th:content="@{/}"/>
+    <meta name="url" th:content="${#request.requestURL}"/>
+    <meta name="uri" th:content="${#request.requestURI}"/>
     <title>Spring project</title>
     <link rel="shortcut icon" th:href="@{/adminUrl/images/favicon.png}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,17 +16,22 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+            	<!-- những phần không thay đổi -->
                 <th:block th:replace="../templates/admin/header :: header"></th:block>
             </div>
             <div class="col-sm-12">
+            	<!-- những phần có thể thay đổi -->
                 <th:block layout:fragment="content"></th:block>
             </div>
         </div>
     </div>
 
+	<!-- những phần có thể thay đổi -->
+	<th:block layout:fragment="script">
     <script th:src="@{/adminUrl/js/jquery-3.3.1.js}"></script>
     <script th:src="@{/adminUrl/js/bootstrap.js}"></script>
     <script th:src="@{/adminUrl/js/popper.min.js}"></script>
+    <script th:src="@{/adminUrl/js/myscript.js}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('select').change(function () {
@@ -33,6 +41,8 @@
             });
         });
     </script>
+    </th:block>
+    
 </body>
 
 </html>

@@ -36,6 +36,7 @@ public class ActicleApiController {
 		if (acticle == null) {
 			response.setStatus(HttpServletResponse.SC_NO_CONTENT);
 		}
+		//hong sont ranvvvvvvvvvvvvvvvvvvvvvvvvvv
 		return acticle;
 	}
 

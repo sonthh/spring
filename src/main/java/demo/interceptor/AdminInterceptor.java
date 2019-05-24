@@ -24,7 +24,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		System.out.println("AdminInterceptor.postHandle()");
-		modelAndView.addObject("myname", "tranhuuhongson");
+//		modelAndView.addObject("myname", "tranhuuhongson");
 		//request.setAttribute("myname", "tranhuuhongson");
 	}
 

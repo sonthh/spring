@@ -11,6 +11,7 @@
         <div class="card-body">
 
             <form action="" method="post" th:object="${category}">
+            	<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                 <div class="form-group">
                     <label for="">Tên</label>
                     <input type="text" value="" th:field="*{name}" class="form-control" id="" placeholder="" />

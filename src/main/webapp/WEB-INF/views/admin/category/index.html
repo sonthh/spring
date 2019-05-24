@@ -1,7 +1,8 @@
-<th:block xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{../templates/admin/template}"
-    layout:fragment="content">
+<th:block xmlns:th="http://www.thymeleaf.org" 
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+		layout:decorate="~{../templates/admin/template}" >
 
-    <div class="card">
+    <div class="card" layout:fragment="content">
         <div class="card-header">
             <nav class="breadcrumb">
                 <a class="breadcrumb-item" th:href="@{/admincp}">Admin</a>
@@ -44,31 +45,16 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <nav aria-label="Page navigation">
-                            <ul class="d-flex justify-content-end pagination pagination-sm">
-
-                                <li class="page-item" th:classappend="${page} == 1 ? disabled">
-                                    <a class="page-link" th:href="@{${page} == 1 ? '#' : '/admin/category/index?page=' + ${page - 1}}">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-
-                                <li class="page-item" th:classappend="${i} == ${page} ? active" th:each="i: ${#numbers.sequence(1, numberOfPages)}">
-                                    <a th:if="${i == 1}" class="page-link" th:text="${i}" th:href="@{'/admin/category/index'}"></a>
-                                    <a th:if="${i != 1}" class="page-link" th:text="${i}" th:href="@{'/admin/category/index?page=' + ${i}}"></a>
-                                </li>
-
-
-                                <li class="page-item" th:classappend="${page} == ${numberOfPages} ? disabled">
-                                    <a class="page-link" th:href="@{${page} == ${numberOfPages} ? '#' : '/admin/category/index?page=' + ${page + 1}}">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
+                        	<!-- gọi fragment đã code sẵn html trong /tempaltes/admin/pagination -->
+                            <ul th:replace="../templates/admin/pagination :: pagination(${page}, ${numberOfPages}, '/admin/category/index')"></ul>
                         </nav>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- có những đoạn scirpt ở file này có còn file kia thì ko, ta đi định nghĩa lại fragment script đã khai báo trong file template.html -->
+	<!-- <th:block layout:fragment="script">
+		<script th:src="@{/page.js}"></script>
+     </th:block> -->
 </th:block>

@@ -1,0 +1,25 @@
+<th:block
+	xmlns:th="http://www.thymeleaf.org" 
+	th:fragment="pagination(page, numberOfPages, uri)" >
+
+	<ul class="d-flex justify-content-end pagination pagination-sm">
+	
+	    <li id="btn-prev" class="page-item" th:classappend="${page} == 1 ? disabled">
+	        <a  class="page-link" th:href="@{${page} == 1 ? '#' : ${uri} +'?page=' + ${page - 1}}">
+	            <span aria-hidden="true">&laquo;</span>
+	        </a>
+	    </li>
+	
+	    <li class="page-item" th:classappend="${i} == ${page} ? active" th:each="i: ${#numbers.sequence(1, numberOfPages)}">
+	        <a th:if="${i == 1}" class="page-link" th:text="${i}" th:href="@{${uri}}"></a>
+	        <a th:if="${i != 1}" class="page-link" th:text="${i}" th:href="@{${uri} + '?page=' + ${i}}"></a>
+	    </li>
+	
+	    <li id="btn-next" class="page-item" th:classappend="${page} == ${numberOfPages} ? disabled">
+	        <a class="page-link" th:href="@{${page} == ${numberOfPages} ? '#' : ${uri} + '?page=' + ${page + 1}}">
+	            <span aria-hidden="true">&raquo;</span>
+	        </a>
+	    </li>
+	</ul>
+
+</th:block>

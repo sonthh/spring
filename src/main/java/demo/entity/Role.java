@@ -1,5 +1,7 @@
 package demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -25,6 +27,7 @@ public class Role {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "roleId") }, inverseJoinColumns = {
 			@JoinColumn(name = "userId") })
+	@JsonIgnore
 	private List<User> users;
 
 	public Integer getId() {

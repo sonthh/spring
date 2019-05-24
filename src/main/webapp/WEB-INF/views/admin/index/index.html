@@ -1,0 +1,57 @@
+<th:block xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{../templates/admin/template}"
+    layout:fragment="content">
+    <div class="card">
+        <div class="card-header">
+            <nav class="breadcrumb">
+                <a class="breadcrumb-item" th:href="@{/admincp}">Admin</a>
+            </nav>
+        </div>
+        <div class="card-body">
+        	
+            <div id="data">
+            	
+            </div>
+            <button id="loadMore" type="button">Load more</button>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script th:src="@{/adminUrl/js/jquery-3.3.1.js}"></script>
+<script>
+	$(document).ready(function() {
+		//var list = JSON.parse(localStorage.getItem('list'));
+		//console.log(list);
+		$("#loadMore").click(function() {
+			$.ajax({
+				url: "[[${#httpServletRequest.getContextPath()}]]/api/acticles",
+				type: 'GET',
+				cache: false,
+				contentType: "application/json",
+				data: {
+				},
+				success: function(data){
+					console.log(data);
+					var html = "";
+					$.each(data, function(i, item) {
+						
+						
+							
+						html += "<div>" + item.name + "</div><hr />";
+					});
+					$("#data").append(html);
+					$("#data div").slice(-2).hide().fadeIn("slow");
+					//console.log(JSON.stringify(data));
+					//localStorage.setItem('list', JSON.stringify(data));
+				},
+				error: function (){
+					console.log("co loi");
+				}
+			});
+		});
+	});
+</script>
+</th:block>

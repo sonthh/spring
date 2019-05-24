@@ -54,6 +54,7 @@
 				</bean>
 				<!-- Note the package would change to 'springsecurity[3|4]' if you are
 					using that version -->
+					<!-- sử dụng sercurity trong thymeleaf -->
 				<bean
 					class="org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect" />
 			</set>
