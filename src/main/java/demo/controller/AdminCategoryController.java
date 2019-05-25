@@ -25,7 +25,7 @@ import demo.util.SlugUtil;
 
 @Controller
 @RequestMapping("admin/category")
-public class AdminCategoryController {//////
+public class AdminCategoryController {///////////
 
 	@Autowired
 	private CategoryRepository categoryRepository;
