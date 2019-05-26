@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationContextConfig {
 
-    //create bean class String
+    //create bean class String/////
     @Bean
     public String myBean() {
         return new String("tran huu hong son");

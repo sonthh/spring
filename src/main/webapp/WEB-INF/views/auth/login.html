@@ -1,8 +1,8 @@
 <th:block xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{../templates/admin/template}"
-    layout:fragment="content">
-
-    <div class="card">
+    layout:decorate="~{../templates/admin/template}">
+    
+	<title layout:fragment="title" >Login</title>
+    <div class="card" layout:fragment="content">
         <div class="card-header">
             <nav class="breadcrumb">
                 <a class="breadcrumb-item" th:href="@{/login}">Auth</a>

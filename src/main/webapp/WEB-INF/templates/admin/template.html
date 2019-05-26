@@ -5,7 +5,7 @@
     <meta name="context-path" th:content="@{/}"/>
     <meta name="url" th:content="${#request.requestURL}"/>
     <meta name="uri" th:content="${#request.requestURI}"/>
-    <title>Spring project</title>
+    <title layout:fragment="title" >Spring mvc</title>
     <link rel="shortcut icon" th:href="@{/adminUrl/images/favicon.png}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" th:href="@{/adminUrl/css/bootstrap.css}" type="text/css">
