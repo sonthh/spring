@@ -1,0 +1,30 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="utf-8">
+    <title>Spring mvc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+   	<button>Click me</button>
+   	<div id="result"></div>
+   	<script th:src="@{/adminUrl/js/jquery-3.3.1.js}"></script>
+    <script type="text/javascript">
+       var btn = document.querySelector("button");
+       console.log(btn);
+       btn.onclick = function() {
+    	   $.ajax({
+               url: "/test",
+               type: 'GET',
+               cache: false,
+               contentType: "html",
+               data: {
+               },
+               success: function(data){
+            	   $("#result").html(data);
+               }
+    	   });
+       }
+    </script>
+</body>
+</html>
