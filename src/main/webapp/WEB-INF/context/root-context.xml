@@ -37,9 +37,9 @@
 
 	<!--<mvc:interceptors>-->
 		<!--<mvc:interceptor>-->
-			<!--<mvc:mapping path="/admin/**"/>-->
-			<!--<mvc:exclude-mapping path="/admin/category/index"/>&lt;!&ndash; ví dụ đường dẫn bỏ qua ko đi qua interceptor &ndash;&gt;-->
-			<!--<bean id="adminInterceptor" class="demo.interceptor.AdminInterceptor"></bean>-->
+			<!--<mvc:mapping path="/demo"/>-->
+			<!--&lt;!&ndash;<mvc:exclude-mapping path="/admin/category/index"/>&lt;!&ndash; ví dụ đường dẫn bỏ qua ko đi qua interceptor &ndash;&gt;&ndash;&gt;-->
+			<!--<bean id="adminInterceptor" class="demo.interceptor.DemoInterceptor"></bean>-->
 		<!--</mvc:interceptor>-->
 	<!--</mvc:interceptors>-->
 

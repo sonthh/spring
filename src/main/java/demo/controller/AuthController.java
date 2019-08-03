@@ -15,7 +15,7 @@ public class AuthController {
 	
 	@GetMapping("login")
 	public String login() {
-		System.out.println(servletContext.getRealPath(""));
+//		System.out.println(servletContext.getRealPath(""));
 		//System.out.println(encoder.encode("123456"));
 		return "auth/login";
 	}

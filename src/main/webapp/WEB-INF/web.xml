@@ -87,6 +87,7 @@
 			/WEB-INF/context/database.xml
 			/WEB-INF/context/javamail.xml
 			/WEB-INF/context/security.xml
+			/WEB-INF/context/schedule.xml
 		</param-value>
 	</context-param>
 
